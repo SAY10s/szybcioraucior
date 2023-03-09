@@ -13,7 +13,12 @@ class Auto {
   }
   oaucie() {
     alert(`
-      Ilość biegów: ${this.biegow}
+      Ilość biegów: ${this.biegow}\n
+      Obecny bieg: ${this.bieg}\n
+      Kolor: ${this.kolor}\n
+      Obecna prędkość: ${this.predkosc}\n
+      Max prędkość: ${this.maxszybkosc}\n
+      Jest włączone: ${this.silnik}\n
     `);
   }
 
@@ -22,9 +27,8 @@ class Auto {
     let przyspieszNested = (wartosc) => {
       if (this.predkosc + wartosc <= this.maxszybkosc)
         this.predkosc = this.predkosc + wartosc;
-      alert(this.predkosc);
+      // alert(this.predkosc);
     };
-    // alert(this.bieg);
     switch (this.bieg) {
       case 0:
         alert("Sory mordo, nie ruszysz na luzie");
@@ -50,24 +54,35 @@ class Auto {
       default:
         alert("SWITCH PRZYSPIESZ: default, coś nie działa");
     }
+    this.render();
   }
 
   //biegi
   zwiekszBieg() {
     if (this.bieg < this.biegow) this.bieg++;
+    this.render();
   }
   zmniejszBieg() {
     if (this.bieg != 0) this.bieg--;
+    this.render();
+  }
+
+  //render
+  render() {
+    document.querySelector("#currentSpeed").textContent = this.predkosc;
+    document.querySelector("#currentGear").textContent = this.bieg;
+    document.querySelector("#isEngineOn").textContent = this.silnik;
   }
 }
 
 let samochod1 = new Auto("Pink", 220);
-// samochod1.oaucie();
-// samochod1.przyspiesz();
-
+document.querySelector("#maxSpeed").textContent = samochod1.maxszybkosc;
+document.querySelector("#gearsAmount").textContent = samochod1.biegow;
+samochod1.render();
 btnSzybciej.addEventListener("click", function () {
   samochod1.przyspiesz();
 });
+
 //biegi
 btnZwiekszBieg.addEventListener("click", function () {
   samochod1.zwiekszBieg();
