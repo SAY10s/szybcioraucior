@@ -1,4 +1,6 @@
 const btnSzybciej = document.querySelector("#speedUp");
+const btnZwiekszBieg = document.querySelector("#gearUp");
+const btnZmniejszBieg = document.querySelector("#gearDown");
 
 class Auto {
   constructor(kolor, maxszybkosc) {
@@ -22,7 +24,7 @@ class Auto {
         this.predkosc = this.predkosc + wartosc;
       alert(this.predkosc);
     };
-    alert(this.bieg);
+    // alert(this.bieg);
     switch (this.bieg) {
       case 0:
         alert("Sory mordo, nie ruszysz na luzie");
@@ -49,13 +51,31 @@ class Auto {
         alert("SWITCH PRZYSPIESZ: default, coś nie działa");
     }
   }
+
+  //biegi
+  zwiekszBieg() {
+    if (this.bieg < this.biegow) this.bieg++;
+  }
+  zmniejszBieg() {
+    if (this.bieg != 0) this.bieg--;
+  }
 }
 
-let samochod1 = new Auto("Pink", 420);
+let samochod1 = new Auto("Pink", 220);
 // samochod1.oaucie();
-samochod1.przyspiesz();
+// samochod1.przyspiesz();
 
 btnSzybciej.addEventListener("click", function () {
   samochod1.przyspiesz();
 });
-document.querySelector("#about").addEventListener("click", samochod1.oaucie);
+//biegi
+btnZwiekszBieg.addEventListener("click", function () {
+  samochod1.zwiekszBieg();
+});
+btnZmniejszBieg.addEventListener("click", function () {
+  samochod1.zmniejszBieg();
+});
+
+document.querySelector("#about").addEventListener("click", function () {
+  samochod1.oaucie();
+});
